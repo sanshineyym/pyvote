@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <div class="container">
+        <h2>投票信息汇总</h2>
+        <link rel="stylesheet" href="{% static 'css/main.css'%}">
+
+
+        <ul>
+            {% for question in q %}
+                <li><a href="{% url 'vote:detail' question.id %}">{{question.question_text}}</a></li>
+            {% empty %}
+                <h>没有投票信息</h>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</body>
+</html>

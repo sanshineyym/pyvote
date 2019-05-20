@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+</head>
+<body>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <div class="container">
+    <h2>{{q.question_text}}</h2>
+
+    {% for r in q.choice_set.all %}
+    <form action="{% url 'vote:detail' q.id %}" method="post">
+     <ul>
+         <li><input type="radio" name="choice" value="{{r.id}}">{{r.choice_text}}</li>
+     </ul>
+    {% endfor %}
+        <input type="submit" value="投票">
+
+    </form>
+
+    <a href="{% url 'vote:index' %}">返回首页</a>
+
+</div>
+
+</body>
+</html>
