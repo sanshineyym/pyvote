@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    #django自带用户系统
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -125,4 +126,12 @@ USE_TZ = True
 # STATIC_URL = '/static/'
 STATIC_URL='/static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+#使用redis数据库储存session 速度快支持持久化
+#电脑安装redis数据库，django redis session
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS_HOST = 'localhost'
+SESSION_REDIS_PORT = 6379
+SESSION_REDIS_DB = 0
+SESSION_REDIS_PASSWORD = ''
+SESSION_REDIS_PREFIX = 'session'
 

@@ -4,6 +4,7 @@ from . import views
 app_name='vote'
 
 urlpatterns=[
+    url(r'^regist/$',views.regist,name='regist'),
     url(r'^login/$',views.login,name='login'),
     url(r'^lonout/$',views.logout,name='logout'),
     url(r'^index/$',views.index,name='index'),

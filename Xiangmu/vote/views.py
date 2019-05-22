@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import question,choice
+from .models import question,choice,MyUser
 from  django.views.generic import View
 # Create your views here.
 
@@ -29,7 +29,7 @@ def login(request):
         return render(request,'vote/login.html')
     else:
         username = request.POST.get('username')
-        if username != None:
+        if username =='abc':
             # denglucg需要将用户相关储存
             res = redirect(reverse('vote:index'))
             #设置cookie 完成登录
@@ -44,9 +44,29 @@ def login(request):
 
 def logout(request):
     res=redirect(reverse('vote:login'))
+    request.session.flush()
     return res
 
+def regist(request):
+    if request.method=='POST':
+        username=request.POST.get('username_regi')
+        pwd=request.POST.get('password_regi')
+        pwd2=request.POST.get('password_regi_2')
+        print(username,pwd2,pwd)
+        error=None
+        if pwd !=pwd2:
+            error='密码不一致'
+
+            return render(request,'vote/login.html',{'error':error})
+        else:
+            MyUser.objects.create_user(username=username,password=pwd,url='http://baidu.com')
+            return redirect(reverse('vote:login'))
+
+
+
 def index(request):
+    if request.method=='POST':
+        username=request.POST.get('')
     # return HttpResponse('首页')
     un=request.session.get('username')
     if un:

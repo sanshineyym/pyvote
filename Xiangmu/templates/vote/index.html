@@ -8,6 +8,7 @@
 
 </head>
 <body>
+    {{ request.user }}
     当前用户：  {{username}} <a href="{% url 'vote:logout'%}">退出</a>
     <div class="container">
         <h2>投票信息汇总</h2>
